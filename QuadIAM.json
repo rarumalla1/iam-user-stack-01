@@ -34,6 +34,10 @@
         "IAMUser": {
             "Type": "AWS::IAM::User",
             "Properties": {
+              "Path" : "/",
+              "LoginProfile" : {
+                "Password" : "quad123"
+              },
                 "UserName": "quad-cloud-user-01",
                 "Groups": [
                     {
