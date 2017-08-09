@@ -1,0 +1,46 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "IAMGroup": {
+            "Type": "AWS::IAM::Group",
+            "Properties": {
+                "GroupName": "quad-cloud-cf-dev"
+            }
+        },
+        "IAMPolicy": {
+            "Type": "AWS::IAM::Policy",
+            "Properties": {
+                "PolicyName": "CloudFormation-and-Ec2-Full-Access",
+                "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Action": [
+                                "cloudformation:*",
+                                "ec2:*"
+                            ],
+                            "Resource": "*"
+                        }
+                    ]
+                },
+                "Groups": [
+                    {
+                        "Ref": "IAMGroup"
+                    }
+                ]
+            }
+        },
+        "IAMUser": {
+            "Type": "AWS::IAM::User",
+            "Properties": {
+                "UserName": "quad-cloud-user-01",
+                "Groups": [
+                    {
+                        "Ref": "IAMGroup"
+                    }
+                ]
+            }
+        }
+    }
+}
